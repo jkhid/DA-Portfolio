@@ -1,6 +1,3 @@
-select *
-from [Housing Project Database]..Housing_Data$
-
 -- Change sale date into standardized date format
 
 select SaleDate, convert(date, SaleDate)
@@ -13,7 +10,6 @@ set SaleDate = convert(date, SaleDate)
 
 select PropertyAddress
 from [Housing Project Database]..Housing_Data$
---where PropertyAddress is null
 order by ParcelID
 
 select a.ParcelID, a.PropertyAddress, b.ParcelID, b.PropertyAddress, ISNULL(a.PropertyAddress, b.PropertyAddress)
@@ -21,7 +17,6 @@ from [Housing Project Database]..Housing_Data$ a
 Join [Housing Project Database]..Housing_Data$ b
 	on a.ParcelID = b.ParcelID
 	and a.[UniqueID ] <> b.[UniqueID ]
---where a.PropertyAddress is null
 
 update a 
 set PropertyAddress = ISNULL(a.PropertyAddress, b.PropertyAddress)
@@ -97,7 +92,6 @@ select *,
 
 from Housing_Data$
 )
---select *
 delete
 from RowNumCTE
 where row_numb = 2
